@@ -105,24 +105,6 @@ _start:
     mov rdi, 0
     call glEnableVertexAttribArray
 
-    mov rax, 2 ;Sys_Open, Opens The File
-    lea rdi, [rel VertexShaderFile]
-    mov rsi, 0 ;Read Only
-    mov rdx, 0 ;We Are Not Creating The File, So The Creation Mode Is 0
-    syscall
-
-    mov rax, 0 ;Sys_Read, Reads What Is Inside The File
-    lea rdi, [rel VertexShaderFileID] ;Vertex Shader Source File Descriptor
-    lea rsi, [rel VertexShaderSource] ;Where The Buffer Will Stay
-    mov rdx, 4096 ;Max Amount Of Bytes That The Kernel Can Read(4KB)
-    syscall
-
-    lea rbx, [rel VertexShaderSource] ;Buffer Base Address
-    mov byte [rbx + rax], 0 ;Writes The Byte 0 At The End
-
-    mov rax, 3 ;Sys_Close, Closes File
-    mov rdi, [rel VertexShaderFileID]
-    syscall
     .Render:
         mov rdi, [Window]
         call glfwWindowShouldClose
@@ -153,13 +135,7 @@ _start:
         mov rax, 60
         xor rdi, rdi
         syscall
-section .bss
-    VertexShaderSource resb 4096
-    VertexShaderFileID resq 1
 
-    FragmentShaderBuffer resb 4096
-    FragmentShaderFile resb "FragmentShader.glsl", 0
-    VertexShaderFileID resq 1
 section .data
     FloatSize equ 4
     Stride equ 3 * FloatSize
@@ -177,7 +153,6 @@ section .data
     AttributesSize equ $ - Attributes
 
 section .rodata
-    VertexShaderFile resb "VertexShader.glsl", 0
 
     Red dd 0.5
     Green dd 0.0
