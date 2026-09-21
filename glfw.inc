@@ -1,0 +1,7 @@
+extern glfwInit
+extern glfwCreateWindow
+extern glfwMakeContextCurrent
+extern glfwWindowShouldClose
+extern glfwTerminate
+extern glfwPollEvents
+extern glfwSwapBuffers

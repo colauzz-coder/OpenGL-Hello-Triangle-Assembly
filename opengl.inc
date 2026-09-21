@@ -1,0 +1,12 @@
+extern glGenVertexArrays
+extern glBindVertexArray
+extern glGenBuffers
+extern glBindBuffer
+extern glBufferData
+extern glVertexAttribPointer
+extern glEnableVertexAttribArray
+extern glDrawArrays
+extern glClear
+extern glClearColor
+extern glGetShaderiv
+extern glGetShaderInfoLog
